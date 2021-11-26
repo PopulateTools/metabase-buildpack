@@ -6,9 +6,16 @@ METABASE_VERSION=`cat ./bin/version`
 METABASE_DIR="$1/target/uberjar"
 METABASE_JAR="$METABASE_DIR/metabase.jar"
 METABASE_URL="https://downloads.metabase.com/v$METABASE_VERSION/metabase.jar"
+METABASE_CLICKHOUSE_JAR="$METABASE_DIR/plugins/clickhouse.metabase-driver.jar"
+METABASE_CLICKHOUSE_URL="https://github.com/enqueue/metabase-clickhouse-driver/releases/download/0.7.5/clickhouse.metabase-driver.jar"
 
 mkdir -p $METABASE_DIR
+mkdir -p $METABASE_DIR/plugins
 
 echo -n "-----> Downloading Metabase... from $METABASE_URL to $METABASE_JAR"
 curl -s --retry 3 -o $METABASE_JAR -L $METABASE_URL
+
+echo -n "-----> Downloading Clickhouse Metabase... from $METABASE_CLICKHOUSE_URL to $METABASE_CLICKHOUSE_JAR"
+curl -s --retry 3 -o $METABASE_CLICKHOUSE_JAR -L $METABASE_CLICKHOUSE_URL
+
 echo "done"
